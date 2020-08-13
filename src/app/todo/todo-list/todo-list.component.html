@@ -1,28 +1,30 @@
 <section class="todo">
   <h2>Todos</h2>
   <ul class="todo-list">
-    <li *ngFor="let todo of todos; index as i" class="todo-item">
-      <input
-        type="checkbox"
-        name="todo-state"
-        [checked]="todo.completed"
-        (click)="updateTodoState(todo)"
-      />
-      <label (dblclick)="editTodo(todo)" [class.completed]="todo.completed">
-        <p class="todo-text" *ngIf="!todo.editing">{{ todo.todo }}</p>
+    <ng-container *ngFor="let todo of todos">
+      <li class="todo-item">
         <input
-          *ngIf="todo.editing"
-          type="text"
-          name="edit"
-          class="edit"
-          #editedTodo
-          (blur)="updateTodo(todo, editedTodo.value)"
-          (keyup.enter)="updateTodo(todo, editedTodo.value)"
-          (keyup.escape)="cancelEditingTodo(todo)"
-          [value]="todo.todo"
+          type="checkbox"
+          name="todo-state"
+          [checked]="todo.completed"
+          (click)="updateTodoState(todo)"
         />
-      </label>
-      <button (click)="deleteTodo(i)" class="delete-btn">Delete</button>
-    </li>
+        <label (dblclick)="editTodo(todo)" [class.completed]="todo.completed">
+          <p class="todo-text" *ngIf="!todo.editing">{{ todo.todo }}</p>
+          <input
+            *ngIf="todo.editing"
+            type="text"
+            name="edit"
+            class="edit"
+            #editedTodo
+            (blur)="updateTodo(todo, editedTodo.value)"
+            (keyup.enter)="updateTodo(todo, editedTodo.value)"
+            (keyup.escape)="cancelEditingTodo(todo)"
+            [value]="todo.todo"
+          />
+        </label>
+        <button (click)="deleteTodo(todo)" class="delete-btn">Delete</button>
+      </li>
+    </ng-container>
   </ul>
 </section>

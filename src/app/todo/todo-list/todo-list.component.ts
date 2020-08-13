@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TodoService } from '../todo.service';
 
 @Component({
@@ -7,19 +7,20 @@ import { TodoService } from '../todo.service';
   styleUrls: ['./todo-list.component.css'],
 })
 export class TodoListComponent implements OnInit {
-  todos;
+  @Input() todos;
+  @Output() todoListUpdated = new EventEmitter();
   constructor(private todoService: TodoService) {}
 
-  ngOnInit(): void {
-    this.todos = this.todoService.getTodos();
-  }
+  ngOnInit(): void {}
 
   updateTodoState(todo) {
     this.todoService.updateTodoState(todo);
+    this.updateTodoList();
   }
 
   deleteTodo(todoIndex) {
     this.todoService.deleteTodo(todoIndex);
+    this.updateTodoList();
   }
 
   editTodo(todo) {
@@ -31,5 +32,9 @@ export class TodoListComponent implements OnInit {
   }
   cancelEditingTodo(todo) {
     this.todoService.cancelEditingTodo(todo);
+  }
+
+  updateTodoList() {
+    this.todoListUpdated.emit();
   }
 }

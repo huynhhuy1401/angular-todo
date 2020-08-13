@@ -48,3 +48,11 @@
   grid-template-columns: 1fr auto;
   margin-bottom: 16px;
 }
+
+.btn-filter {
+  border: none;
+  border-radius: 5px;
+  margin-right: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}

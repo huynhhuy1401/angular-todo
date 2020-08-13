@@ -7,12 +7,26 @@ import { TodoService } from './todo.service';
   styleUrls: ['./todo.component.css'],
 })
 export class TodoComponent implements OnInit {
+  todos;
   newTodo = '';
+  displayFilter = 'all';
   constructor(private todoService: TodoService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.todos = this.todoService.getTodos('all');
+  }
 
   addNewTodo() {
     this.todoService.addTodo(this.newTodo);
+    this.todos = this.todoService.getTodos(this.displayFilter);
+  }
+
+  setFilter(displayFilter) {
+    this.displayFilter = displayFilter;
+    this.todos = this.todoService.getTodos(displayFilter);
+  }
+
+  updateTodoList() {
+    this.todos = this.todoService.getTodos(this.displayFilter);
   }
 }

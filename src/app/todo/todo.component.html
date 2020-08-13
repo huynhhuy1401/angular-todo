@@ -13,7 +13,21 @@
       <button (click)="addNewTodo()" class="add-todo-btn">Add</button>
     </section>
     <section class="todos">
-      <app-todo-list></app-todo-list>
+      <app-todo-list
+        (todoListUpdated)="updateTodoList()"
+        [todos]="todos"
+      ></app-todo-list>
     </section>
+  </section>
+  <section class="card-footer">
+    <button type="button" class="btn-filter" (click)="setFilter('all')">
+      All
+    </button>
+    <button type="button" class="btn-filter" (click)="setFilter('active')">
+      Active
+    </button>
+    <button type="button" class="btn-filter" (click)="setFilter('completed')">
+      Completed
+    </button>
   </section>
 </div>

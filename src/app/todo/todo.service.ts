@@ -31,16 +31,22 @@ export class TodoService {
     });
   }
 
-  getTodos() {
-    return this.todoList;
+  getTodos(displayFilter) {
+    if (displayFilter === 'all') {
+      return this.todoList;
+    } else if (displayFilter === 'active') {
+      return this.todoList.filter((todo) => !todo.completed);
+    } else {
+      return this.todoList.filter((todo) => todo.completed);
+    }
   }
 
   updateTodoState(todo) {
     todo.completed = !todo.completed;
   }
 
-  deleteTodo(todoIndex) {
-    this.todoList.splice(todoIndex, 1);
+  deleteTodo(todo) {
+    this.todoList = this.todoList.filter((t) => t !== todo);
   }
 
   editTodo(todo) {

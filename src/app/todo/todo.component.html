@@ -1,0 +1,19 @@
+<div class="card">
+  <section class="card-header">
+    <h1 class="card-title">Todo App</h1>
+  </section>
+  <section class="card-content">
+    <section class="add-todo">
+      <input
+        [(ngModel)]="newTodo"
+        class="text-input"
+        type="text"
+        placeholder="Add new todos here"
+      />
+      <button (click)="addNewTodo()" class="add-todo-btn">Add</button>
+    </section>
+    <section class="todos">
+      <app-todo-list></app-todo-list>
+    </section>
+  </section>
+</div>
